@@ -16,7 +16,7 @@ namespace E_Library.CustomMiddleware
 
         public Task Invoke(HttpContext httpContext)
         {
-
+            httpContext.Response.Headers.Add("Author", "Fred");
             return _next(httpContext);
         }
     }

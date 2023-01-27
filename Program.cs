@@ -1,3 +1,4 @@
+using E_Library.CustomMiddleware;
 using E_Library.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -19,6 +20,7 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
+app.UseMyMiddleware();
 
 
 app.MapControllerRoute(

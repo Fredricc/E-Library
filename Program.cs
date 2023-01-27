@@ -1,8 +1,11 @@
+using E_Library.DependencyInjection;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllersWithViews();
+builder.Services.AddTransient<IConsoleWriter, ConsoleWriter>();
 
 var app = builder.Build();
 

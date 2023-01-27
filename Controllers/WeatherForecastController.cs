@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using E_Library.DependencyInjection;
+using Microsoft.AspNetCore.Mvc;
 
 namespace E_Library.Controllers
 {
@@ -12,15 +13,20 @@ namespace E_Library.Controllers
     };
 
         private readonly ILogger<WeatherForecastController> _logger;
+        private IConsoleWriter _IConsoleWriter;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        public WeatherForecastController(ILogger<WeatherForecastController> logger, IConsoleWriter prIConsoleWriter)
         {
             _logger = logger;
+            _IConsoleWriter = prIConsoleWriter;
         }
 
         [HttpGet]
         public IEnumerable<WeatherForecast> Get()
         {
+            //Dependency Injection
+            _IConsoleWriter.write();
+
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
                 Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),

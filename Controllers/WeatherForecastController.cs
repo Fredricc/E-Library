@@ -1,4 +1,5 @@
 ﻿using E_Library.DependencyInjection;
+using E_Library.Model.DTO;
 using Microsoft.AspNetCore.Mvc;
 
 namespace E_Library.Controllers

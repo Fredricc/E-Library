@@ -1,4 +1,4 @@
-namespace E_Library
+namespace E_Library.Model.DTO
 {
     public class WeatherForecast
     {

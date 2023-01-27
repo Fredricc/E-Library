@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using E_Library.Model.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace E_Library
 {
@@ -9,5 +10,6 @@ namespace E_Library
         {
         
         }
+        public DbSet<Library> Libraries { get; set; }
     }
 }

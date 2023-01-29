@@ -1,5 +1,6 @@
 ﻿using E_Library.DependencyInjection;
 using E_Library.Model.DTO;
+using E_Library.Model.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace E_Library.Controllers
@@ -15,18 +16,24 @@ namespace E_Library.Controllers
 
         private readonly ILogger<WeatherForecastController> _logger;
         private IConsoleWriter _IConsoleWriter;
+        private ILibraryService _ILibraryService;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger, IConsoleWriter prIConsoleWriter)
+        public WeatherForecastController(ILogger<WeatherForecastController> logger, IConsoleWriter prIConsoleWriter, ILibraryService prLibraryService)
         {
             _logger = logger;
             _IConsoleWriter = prIConsoleWriter;
+            _ILibraryService = prLibraryService;
         }
 
         [HttpGet]
         public IEnumerable<WeatherForecast> Get()
         {
             //Dependency Injection
-            _IConsoleWriter.write();
+            //_IConsoleWriter.write();
+
+            /* GET LIBRARY */
+            List<Library> ILibraries = _ILibraryService.GetAll();
+
 
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {

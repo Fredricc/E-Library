@@ -10,7 +10,7 @@
 
         public List<Library> GetAll()
         {
-            return null;
+            return _context Libraries.ToList();
         }
         public List<Library> GetByName(string prName)
         {

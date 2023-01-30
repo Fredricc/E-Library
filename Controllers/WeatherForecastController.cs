@@ -33,8 +33,17 @@ namespace E_Library.Controllers
 
             /* GET LIBRARY */
             //List<Library> ILibraries = _ILibraryService.GetAll();
-            List<Library> ILibraries = _ILibraryService.GetByName("OXFORD");
+            //List<Library> ILibraries = _ILibraryService.GetByName("OXFORD");
 
+            /* ADD LIBRARY
+            Library lNewLibrary = new Library() { Name = "Test Library", Address = "Test Address", Telephone = "234789012" };
+            _ILibraryService.Save(lNewLibrary);
+            */
+
+            /* UPDATE LIBRARY*/
+            Library lLibraryToUpdate = _ILibraryService.GetByName("Test Library").FirstOrDefault();
+            lLibraryToUpdate.Name = "TEST LIBRARY UPDATED";
+            _ILibraryService.Update(lLibraryToUpdate);
 
 
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast

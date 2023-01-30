@@ -32,7 +32,9 @@ namespace E_Library.Controllers
             //_IConsoleWriter.write();
 
             /* GET LIBRARY */
-            List<Library> ILibraries = _ILibraryService.GetAll();
+            //List<Library> ILibraries = _ILibraryService.GetAll();
+            List<Library> ILibraries = _ILibraryService.GetByName("OXFORD");
+
 
 
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast

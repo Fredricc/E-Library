@@ -1,0 +1,27 @@
+﻿CREATE DATABAE E_LIBRARYDATABASE;
+GO
+
+USE E_LIBRARYDATABASE;
+GO
+
+CREATE TABLE dbo.Library(
+	Id int IDENTITY(1, 1) NOT NULL,
+	Name nvachar(50) NOT NULL,
+	Address nvachar(100) NOT NULL,
+	Telephone nvachar(15) NOT NULL,
+	CONSTRAINT PK_Library PRIMARY KEY CLUSTED ( Id ASC)
+);
+GO
+
+--INSERT LIBRARY
+  INSERT INTO [dbo].[Library] ([Name], [Address], [Telephone]) values ('LIBRARY OF CONGRESS', 'WASHINGTON D.C,USA','123456789');
+  INSERT INTO [dbo].[Library] ([Name], [Address], [Telephone]) values ('LIBRARY OF OXFORD', 'OXFORD, KISUMU','123456789');
+  INSERT INTO [dbo].[Library] ([Name], [Address], [Telephone]) values ('READING ROOM AT THE BRITISH MUSEUM', 'LONDON, ENGLAND','123456789');
+  INSERT INTO [dbo].[Library] ([Name], [Address], [Telephone]) values ('KEMU LIBRARY', 'NAIROBI, KENYA','123456789');
+  INSERT INTO [dbo].[Library] ([Name], [Address], [Telephone]) values ('MACMILLAN LIBRARY', 'NAIROBI CBD, KENYA','123456789');
+  INSERT INTO [dbo].[Library] ([Name], [Address], [Telephone]) values ('VATICAN LIBRARY', 'VATICAN CITY, ROME','123456789');
+  INSERT INTO [dbo].[Library] ([Name], [Address], [Telephone]) values ('THOMAS FISHER RARE BOOK LIBRARY', 'TORONTO, CANADA','123456789');
+  INSERT INTO [dbo].[Library] ([Name], [Address], [Telephone]) values ('NEW YORK PUBLIC LIBRARY', 'NEW YORK, NEW YORK, USA','123456789');
+  INSERT INTO [dbo].[Library] ([Name], [Address], [Telephone]) values ('LIBRARY OF PARLIAMENT', 'OXFORD, OTTAWA, CANADA','123456789');
+  INSERT INTO [dbo].[Library] ([Name], [Address], [Telephone]) values ('BOSTON PUBLIC LIBRARY', 'BOSTON, MASSACHUSETTS, USA','123456789');
+  INSERT INTO [dbo].[Library] ([Name], [Address], [Telephone]) values ('NATIONAL LIBRARY OF ST.MRK', 'VENICE, ITALY','123456789');

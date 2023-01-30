@@ -40,11 +40,15 @@ namespace E_Library.Controllers
             _ILibraryService.Save(lNewLibrary);
             */
 
-            /* UPDATE LIBRARY*/
+            /* UPDATE LIBRARY
             Library lLibraryToUpdate = _ILibraryService.GetByName("Test Library").FirstOrDefault();
             lLibraryToUpdate.Name = "TEST LIBRARY UPDATED";
             _ILibraryService.Update(lLibraryToUpdate);
+            */
 
+            /* DELETE LIBRARY */
+            Library lLibraryToUpdate = _ILibraryService.GetByName("TEST LIBRARY UPDATED").FirstOrDefault();
+            _ILibraryService.Delete(lLibraryToUpdate);
 
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {

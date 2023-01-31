@@ -16,9 +16,16 @@ namespace E_Library.Controllers
         }
 
         [HttpGet]
-        public Library Get()
+        public IActionResult GetAll()
         {
-            return new Library();
+            List<Library> IResult = _ILibraryService.GetAll();
+            return Ok(IResult);
+        }
+        [HttpGet]
+        public IActionResult Search( string prName)
+        {
+            List<Library> IResult = _ILibraryService.GetByName(prName);
+            return Ok(IResult);
         }
     }
 }

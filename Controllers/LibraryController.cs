@@ -27,5 +27,11 @@ namespace E_Library.Controllers
             List<Library> IResult = _ILibraryService.GetByName(prName);
             return Ok(IResult);
         }
+
+        [HttpPut]
+        public IActionResult Update(Library prLibrary)
+        {
+            return Ok(_ILibraryService.Update(prLibrary));
+        }
     }
 }

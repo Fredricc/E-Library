@@ -2,6 +2,7 @@ import { Counter } from "./components/Counter";
 import { FetchData } from "./components/FetchData";
 import { Home } from "./components/Home";
 import { MyClassComponent } from "./components/MyComponent/MyClassComponent";
+import MyFunctionalComponent from "./components/MyComponent/MyFunctionalComponent";
 
 const AppRoutes = [
   {
@@ -19,7 +20,11 @@ const AppRoutes = [
   {
     path: '/MyClassComponent',
     element: <MyClassComponent />
-  }
+    },
+    {
+        path: '/MyFunctionalComponent',
+        element: <MyFunctionalComponent />
+    }
 ];
 
 export default AppRoutes;

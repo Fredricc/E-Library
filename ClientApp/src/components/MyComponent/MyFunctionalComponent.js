@@ -9,12 +9,12 @@ function componentUnmount() {
     alert("Leaving the Component");
 }
 
-useEffect(() => {
-    componentMount();
-    return() => {
-        componentUnmount();
-    }
-}, [])
+//useEffect(() => {
+//    componentMount();
+//    return() => {
+//        componentUnmount();
+//    }
+//}, [])
 
     /* STATE */
     const [age, setAge] = useState(20);
@@ -26,7 +26,16 @@ useEffect(() => {
     }
     const showDetails = (prTelephone) => {
         alert(`Name: ${props.name ? props.name : 'Fred'} | Age: ${age} | Telephone: ${prTelephone}`);
-}
+    }
+
+    /*CONDITIONAL RENDERING */
+    let FredAge = () => {
+        if (age > 25)
+            return (<p>Fred has more than 25 years</p>)
+        else
+            return (<p>Fred has 25 years or less</p>)
+
+    }
 
     return (
         <div>
@@ -51,6 +60,29 @@ useEffect(() => {
             <h4>Event Handling </h4>
             <button onClick={showDetails.bind(this, 234578843)}>Show Details</button>
             <hr />
+
+            {/* EXAMPLE 1 IF/ELSE */}
+            {FredAge()}
+
+            {/*EXAMPLE 2 - TERNARY OPERATOR */}
+            <p>{age > 25 ? 'Fred has more than 25 years' : 'Fred has 25 years or less'} </p>
+
+            {/*EXAMPLE 3 - short-circuit OPERATOR */}
+            {age > 25 && <p>Fred has more than 25 years</p> }
+            {age <= 25 && <p>Fred has 25 years or less </p>}
+
+            {/*EXAMPLE 4 - IMMEDIATELY INVOKED FUNCTION */}
+            {
+                (() => {
+                    switch (age) {
+                        case 25: return <p>Fred has 25 years</p>;
+                        case 26: return <p>Fred has over 25 years</p>;
+                        case 30: return <p>Fred is in his 30s</p>;
+                        case 18: return <p>Fred is under 18 years</p>;
+                        default: return <p>Fred has less than 25 years</p>;
+                    }
+                })()
+            }
 
 
         </div>

@@ -25,7 +25,7 @@ useEffect(() => {
         setAge(parseInt(event.target.value));
     }
     const showDetails = (prTelephone) => {
-    alert(`Name: ${props.name ? props.name : 'Fred'} | Age: ${age} | Telephone: {prTelephone}`);
+        alert(`Name: ${props.name ? props.name : 'Fred'} | Age: ${age} | Telephone: ${prTelephone}`);
 }
 
     return (
@@ -49,7 +49,7 @@ useEffect(() => {
             {/* EVENT HANDLING*/}
             <hr />
             <h4>Event Handling </h4>
-            <button onClick={showDetails}>Show Details</button>
+            <button onClick={showDetails.bind(this, 234578843)}>Show Details</button>
             <hr />
 
 

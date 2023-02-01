@@ -19,10 +19,19 @@ useEffect(() => {
     /* STATE */
     const [age, setAge] = useState(20);
 
+    /*EVENT HANDLING */
+    const onChangeAgeInput = (event) => {
+        alert("Age has changed");
+        setAge(parseInt(event.target.value));
+    }
+    const showDetails = (prTelephone) => {
+    alert(`Name: ${props.name ? props.name : 'Fred'} | Age: ${age} | Telephone: {prTelephone}`);
+}
+
     return (
         <div>
             <h2>
-                MyFunctional Component
+                My Functional Component
                 {/* PROPS */ }
                 
             </h2>
@@ -32,10 +41,17 @@ useEffect(() => {
             <hr />
             <h4>State</h4>
             <span>
-                <b>Age: </b>{age}
+                <b>Age: </b><input type="number" value={age} onChange={onChangeAgeInput} />
                 <button onClick={() => setAge(age + 1)}>+</button>
                 <button onClick={() => setAge(age - 1)}>-</button>
             </span>
+
+            {/* EVENT HANDLING*/}
+            <hr />
+            <h4>Event Handling </h4>
+            <button onClick={showDetails}>Show Details</button>
+            <hr />
+
 
         </div>
         )

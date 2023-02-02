@@ -37,6 +37,19 @@ function componentUnmount() {
 
     }
 
+    /* ITERATION */
+    let users = [
+        {name: 'Fred', age: 20 },
+        {name: 'Hellen', age: 21 },
+        {name: 'Jack', age: 35 },
+        { name: 'Peter', age: 45 }
+    ]
+
+    //ITERATION EXAMPLE
+    let userList = users.map((user) =>
+        <li key={user.name}> Name: {user.name} -Age: {user.age}</li>
+    );
+
     return (
         <div>
             <h2>
@@ -84,6 +97,19 @@ function componentUnmount() {
                 })()
             }
 
+            {/*ITERATION */}
+            <hr />
+            <h4>ITERATION</h4>
+            <hr />
+            <ul>
+                {/* EXAMPLE 1 */ }
+                {userList}
+
+                {/* EXAMPLE 2 */}
+                <hr />
+                {users.map((user) => <li key={user.name}> Name: {user.name} - Age: {user.age}</li>) 
+                }
+            </ul>
 
         </div>
         )

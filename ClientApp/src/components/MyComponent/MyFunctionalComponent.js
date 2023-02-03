@@ -1,13 +1,13 @@
-﻿import React, { useEffect, useState } from "react";
+﻿import React, { useEffect, useState, useRef } from "react";
 
 const MyFunctionalComponent = (props) => { 
 
-    function componentMount() {
-        alert("Component render");
-    }
-function componentUnmount() {
-    alert("Leaving the Component");
-}
+//    function componentMount() {
+//        alert("Component render");
+//    }
+//function componentUnmount() {
+//    alert("Leaving the Component");
+//}
 
 //useEffect(() => {
 //    componentMount();
@@ -59,6 +59,15 @@ function componentUnmount() {
     let userList = users.map((user) =>
         <li key={user.name}> Name: {user.name} -Age: {user.age}</li>
     );
+
+    /* REFS */
+    const inputRefName = useRef(null);
+    const inputRefTelephone = useRef(null);
+    const clearRefFields = () => {
+        inputRefName.current.value = "";
+        inputRefTelephone.current.value = "";
+        inputRefName.current.focus();
+    }
 
     return (
         <div>
@@ -130,6 +139,21 @@ function componentUnmount() {
                 </label>
                 <input type="submit" value="Submit" />
             </form>
+
+            {/* REFS*/}
+            <hr />
+            <h4>Refs</h4>
+            <label>
+                Name: 
+                <input type="text" ref={inputRefName} />
+            </label>
+            <label>
+                Telephone:
+                <input type="text" ref={inputRefTelephone } />
+                <button onClick={clearRefFields.bind(this)}> Clear Fields</button>
+            </label>
+            <hr />
+            <br />
 
 
         </div>

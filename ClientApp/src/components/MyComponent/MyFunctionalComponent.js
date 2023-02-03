@@ -45,6 +45,16 @@ function componentUnmount() {
         { name: 'Peter', age: 45 }
     ]
 
+    /*FORM */
+    const [userName, setUserName] = useState("Jack");
+    const handleUserNameChange = (event) => {
+        setUserName(event.target.value);
+    }
+    const handleSubmit = (event) => {
+        alert("Form submitted. Value: " + userName)
+    }
+
+
     //ITERATION EXAMPLE
     let userList = users.map((user) =>
         <li key={user.name}> Name: {user.name} -Age: {user.age}</li>
@@ -110,6 +120,17 @@ function componentUnmount() {
                 {users.map((user) => <li key={user.name}> Name: {user.name} - Age: {user.age}</li>) 
                 }
             </ul>
+            {/* FORMS*/}
+            <hr />
+            <h4>Form</h4>
+            <form onSubmit={handleSubmit}>
+                <label>
+                    Name: 
+                    <input type="text" value={userName} onChange={handleUserNameChange} />
+                </label>
+                <input type="submit" value="Submit" />
+            </form>
+
 
         </div>
         )

@@ -19,6 +19,21 @@ const LibraryComponent = (props) => {
         })
     }
 
+    /* UPDATE */
+    const handleLibraryInputChange = (prLibrary, prInput) => {
+        let librariesNewReference = [...librariesList]; //Create a copy of the object with new reference (new space in memory)
+        const Index = librariesNewReference.findIndex((item) => item.name === prLibrary.name);
+        const { name, value } = prInput.target;// Get the NAME and VALUE of the property changed
+        librariesNewReference[Index] = { ...prLibrary, [name]: value }; // Update just the specific property keeping the others
+        setLibrariesList(librariesNewReference);
+    }
+    const editLibrary = (prLibrary) => {
+        let librariesNewReference = [...librariesList]; //Create a copy of the object with new reference (new space in memory)
+        const Index = librariesNewReference.findIndex((item) => item.name === prLibrary.name);
+        librariesNewReference[Index].isEditing = true;
+        setLibrariesList(librariesNewReference);
+    }
+
     return (
         <div>
             <hr />
@@ -88,14 +103,13 @@ const LibraryComponent = (props) => {
                         <tbody>
                             {librariesList.map(item =>
                                 <tr key={item.name}>
-                                    <td>{item.name}</td>
-                                    <td>{item.address}</td>
-                                    <td>{item.telephone}</td>
+                                    <td><input className="form-control" value={item.name} onChange={handleLibraryInputChange.bind(this, item) } name="name" disabled={!item.isEditing} /></td>
+                                    <td><input className="form-control" value={item.address} onChange={handleLibraryInputChange.bind(this, item)} name="address" disabled={!item.isEditing} /></td>
+                                    <td><input className="form-control" value={item.telephone} onChange={handleLibraryInputChange.bind(this, item)} name="telephone" disabled={!item.isEditing} /></td>
                                     <td>
                                         <div className="btn-toolbar">
-                                            <button className="btn btn-info m-1 mb-0 mt-0" type="button" style={{ display: item.isEditing ? 'none' : 'block' }}>Edit</button>
-                                            {/*<button className="btn btn-success m-1 mb-0 mt-0">Save</button>*/}
-                                            {/*<button className="btn btn-danger m-1 mb-0 mt-0">Delete</button>*/}
+                                            <button className="btn btn-info m-1 mb-0 mt-0" type="button" onClick={editLibrary.bind(this, item) } style={{ display: item.isEditing ? 'none' : 'block' }}>Edit</button>
+                                         
                                         </div>
                                     </td>
                                 </tr>

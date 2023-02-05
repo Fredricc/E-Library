@@ -12,8 +12,9 @@ const LibraryComponent = (props) => {
         setSearchParameterName(event.target.value.toString());
     }
     const searchItem = () => {
-        let URL = searchParameterName != "" ? ("https://localhost:7010/api/Library/Search?prName=" + searchParameterName) : "https://localhost:7010/api/Library/GetAll";
+        let URL = searchParameterName !== "" ? ("https://localhost:7010/api/Library/Search?prName=" + searchParameterName) : "https://localhost:7010/api/Library/GetAll";
         axios.get(URL).then(response => {
+            response.data.map(item => { item.isEditing = false;})
             setLibrariesList(response.data);
         })
     }
@@ -90,16 +91,17 @@ const LibraryComponent = (props) => {
                                     <td>{item.name}</td>
                                     <td>{item.address}</td>
                                     <td>{item.telephone}</td>
+                                    <td>
+                                        <div className="btn-toolbar">
+                                            <button className="btn btn-info m-1 mb-0 mt-0" type="button" style={{ display: item.isEditing ? 'none' : 'block' }}>Edit</button>
+                                            {/*<button className="btn btn-success m-1 mb-0 mt-0">Save</button>*/}
+                                            {/*<button className="btn btn-danger m-1 mb-0 mt-0">Delete</button>*/}
+                                        </div>
+                                    </td>
                                 </tr>
                                 )}
                             <tr>
-                                {/*<td>*/}
-                                {/*    <div className="btn-toolbar">*/}
-                                {/*        <button className="btn btn-info m-1 mb-0 mt-0">Edit</button>*/}
-                                {/*        <button className="btn btn-success m-1 mb-0 mt-0">Save</button>*/}
-                                {/*        <button className="btn btn-danger m-1 mb-0 mt-0">Delete</button>*/}
-                                {/*    </div>*/}
-                                {/*</td>*/}
+                                
                             </tr>
                         </tbody>
                     </table>

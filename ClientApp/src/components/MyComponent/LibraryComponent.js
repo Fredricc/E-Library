@@ -1,7 +1,23 @@
-﻿import React from "react";
-import axiox from "axios"
+﻿import React, { useState } from "react";
+import axios from "axios"
 
 const LibraryComponent = (props) => {
+
+    /* LIST LIBRARIES */
+    const [librariesList, setLibrariesList] = useState([]);
+
+    /* SEARCH */
+    const [searchParameterName, setSearchParameterName] = useState('');
+    const handleInputChange = (event) => {
+        setSearchParameterName(event.target.value.toString());
+    }
+    const searchItem = () => {
+        let URL = searchParameterName != "" ? ("https://localhost:7010/api/Library/Search?prName=" + searchParameterName) : "https://localhost:7010/api/Library/GetAll";
+        axios.get(URL).then(response => {
+            setLibrariesList(response.data);
+        })
+    }
+
     return (
         <div>
             <hr />
@@ -16,12 +32,12 @@ const LibraryComponent = (props) => {
                         <div className="row">
                             <div className="col-md-7">
                                 <label className="form-label">Name</label>
-                                <input className="form-control" placeholder="Enter Name" name="name" type="text" />
+                                    <input className="form-control" placeholder="Enter Name" name="name" type="text" value={searchParameterName} onChange={handleInputChange} />
                             </div>
                             <div className="col-md-5">
                                 <label className="form-label">&nbsp;</label>
                                 <div className="btn-toolbar">
-                                    <button type="button" className="btn btn-primary form-control">Search</button>
+                                        <button type="button" className="btn btn-primary form-control" onClick={searchItem.bind(this)}>Search</button>
                                 </div>
                             </div>
                         </div>
@@ -66,21 +82,24 @@ const LibraryComponent = (props) => {
                                 <th>Name</th>
                                 <th>Address</th>
                                 <th>Telephone</th>
-                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
+                            {librariesList.map(item =>
+                                <tr key={item.name}>
+                                    <td>{item.name}</td>
+                                    <td>{item.address}</td>
+                                    <td>{item.telephone}</td>
+                                </tr>
+                                )}
                             <tr>
-                                <td><input className="form-control" type="text" value="Name" /> </td>
-                                <td><input className="form-control" type="text" value="Address" /> </td>
-                                <td><input className="form-control" type="text" value="Telephone" /> </td>
-                                <td>
-                                    <div className="btn-toolbar">
-                                        <button className="btn btn-info m-1 mb-0 mt-0">Edit</button>
-                                        <button className="btn btn-success m-1 mb-0 mt-0">Save</button>
-                                        <button className="btn btn-danger m-1 mb-0 mt-0">Delete</button>
-                                    </div>
-                                </td>
+                                {/*<td>*/}
+                                {/*    <div className="btn-toolbar">*/}
+                                {/*        <button className="btn btn-info m-1 mb-0 mt-0">Edit</button>*/}
+                                {/*        <button className="btn btn-success m-1 mb-0 mt-0">Save</button>*/}
+                                {/*        <button className="btn btn-danger m-1 mb-0 mt-0">Delete</button>*/}
+                                {/*    </div>*/}
+                                {/*</td>*/}
                             </tr>
                         </tbody>
                     </table>

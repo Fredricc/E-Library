@@ -33,6 +33,15 @@ const LibraryComponent = (props) => {
         librariesNewReference[Index].isEditing = true;
         setLibrariesList(librariesNewReference);
     }
+    const confirmUpdate = (prLibrary) => {
+        axios.put("https://localhost:7010/api/Library/update", prLibrary).then(response => {
+            let librariesNewReference = [...librariesList]; 
+            const Index = librariesNewReference.findIndex((item) => item.name === prLibrary.name);
+            librariesNewReference[Index] = prLibrary;
+            librariesNewReference[Index].isEditing = false;
+            setLibrariesList(librariesNewReference);
+        })
+    }
 
     return (
         <div>
@@ -109,6 +118,7 @@ const LibraryComponent = (props) => {
                                     <td>
                                         <div className="btn-toolbar">
                                             <button className="btn btn-info m-1 mb-0 mt-0" type="button" onClick={editLibrary.bind(this, item) } style={{ display: item.isEditing ? 'none' : 'block' }}>Edit</button>
+                                            <button className="btn btn-success m-1 mb-0 mt-0" type="button" onClick={confirmUpdate.bind(this, item) } style={{ display: item.isEditing ? 'block' : 'none' }}>Save</button>
                                          
                                         </div>
                                     </td>

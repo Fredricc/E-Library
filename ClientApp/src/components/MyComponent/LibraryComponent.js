@@ -15,9 +15,12 @@ const LibraryComponent = (props) => {
     const searchItem = () => {
         let URL = searchParameterName !== "" ? ("https://localhost:7010/api/Library/Search?prName=" + searchParameterName) : "https://localhost:7010/api/Library/GetAll";
         axios.get(URL).then(response => {
-            response.data.map(item => { item.isEditing = false;})
+            response.data.map(item => { item.isEditing = false; })
             setLibrariesList(response.data);
-        })
+        }).catch(error => {
+            setAlertErrorMessage(error.message);
+            setShowAlertError(true);
+        });
     }
 
     /* UPDATE */
@@ -29,10 +32,16 @@ const LibraryComponent = (props) => {
         setLibrariesList(librariesNewReference);
     }
     const updateEditingStatus = (prLibrary, prFlag) => {
-        let librariesNewReference = [...librariesList]; //Create a copy of the object with new reference (new space in memory)
-        const Index = librariesNewReference.findIndex((item) => item.name === prLibrary.name);
-        librariesNewReference[Index].isEditing = prFlag;
-        setLibrariesList(librariesNewReference);
+        try {
+            let librariesNewReference = [...librariesList]; //Create a copy of the object with new reference (new space in memory)
+            const Index = librariesNewReference.findIndex((item) => item.name === prLibrary.name);
+            librariesNewReference[Index].isEditing = prFlag;
+            setLibrariesList(librariesNewReference);
+        }
+        catch (error) {
+            setAlertErrorMessage(error.message);
+            setShowAlertError(true);
+           };
     }
     const confirmUpdate = (prLibrary) => {
         axios.put("https://localhost:7010/api/Library/update", prLibrary).then(response => {
@@ -41,7 +50,10 @@ const LibraryComponent = (props) => {
             librariesNewReference[Index] = prLibrary;
             librariesNewReference[Index].isEditing = false;
             setLibrariesList(librariesNewReference);
-        })
+        }).catch(error => {
+            setAlertErrorMessage(error.message);
+            setShowAlertError(true);
+        });
     }
 
     /* INSERT */
@@ -59,7 +71,10 @@ const LibraryComponent = (props) => {
             setLibrariesList(librariesNewReference);
             setLibraryToAdd({ name: '', address: '', telephone: '' }); // Clear the state
             setShowAlertNewLibrary(true);
-        })
+        }).catch(error => {
+            setAlertErrorMessage(error.message);
+            setShowAlertError(true);
+        });
     }
     /* DELETE */
     const deleteLibrary = (prLibrary) => {
@@ -73,6 +88,8 @@ const LibraryComponent = (props) => {
 
     /* ALERT */
     const [showAlertNewLibrary, setShowAlertNewLibrary] = useState(false);
+    const [showAlertError, setShowAlertError] = useState(false);
+    const [alertErrorMessage, setAlertErrorMessage] = useState('');
 
     return (
         <div>
@@ -172,6 +189,16 @@ const LibraryComponent = (props) => {
                 onConfirm={() => setShowAlertNewLibrary(false)}>
                 Please click "Ok" to close
             </SweetAlert>
+            }
+            {/* ALERT ERROR*/}
+            {showAlertError &&
+                <SweetAlert danger
+                    confirmBtnText="Ok"
+                    confirmBtnBsStyle="success"
+                    title="Something went wrong"
+                    onConfirm={() => setShowAlertNewLibrary(false)}>
+                    {alertErrorMessage }
+                </SweetAlert>
             }
         </div>
         )

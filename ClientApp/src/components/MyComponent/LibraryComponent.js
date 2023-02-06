@@ -43,6 +43,15 @@ const LibraryComponent = (props) => {
         })
     }
 
+    /* INSERT */
+    const [libraryToAdd, setLibraryToAdd] = useState({ name: '', address: '', telephone: '' });
+    const handleLibraryToAddInputChange = (prInput) => {
+        const { name, value } = prInput.target;
+        let librariesNewReference = { ...libraryToAdd, [name]: value };
+        setLibraryToAdd(librariesNewReference);
+
+    }
+
     return (
         <div>
             <hr />
@@ -77,15 +86,15 @@ const LibraryComponent = (props) => {
                             <div className="row">
                                 <div className="col-md-3">
                                     <label className="form-label">Name</label>
-                                    <input className="form-control" placeholder="Enter Name" name="name" type="text" />
+                                    <input className="form-control" placeholder="Enter Name" name="name" value={libraryToAdd.name} onChange={handleLibraryToAddInputChange.bind(this)} type="text" />
                                 </div>
                                 <div className="col-md-4">
                                     <label className="form-label">Address</label>
-                                    <input className="form-control" placeholder="Enter Address" name="address" type="text" />
+                                    <input className="form-control" placeholder="Enter Address" name="address" value={libraryToAdd.address} onChange={handleLibraryToAddInputChange.bind(this)} type="text" />
                                 </div>
                                 <div className="col-md-3">
                                     <label className="form-label">Telephone</label>
-                                    <input className="form-control" placeholder="Enter Telephone" name="telephone" type="text" />
+                                    <input className="form-control" placeholder="Enter Telephone" name="telephone" value={libraryToAdd.telephone} onChange={handleLibraryToAddInputChange.bind(this)} type="text" />
                                 </div>
                                 <div className="col-md-2">
                                     <label className="form-label">&nbsp;</label>
